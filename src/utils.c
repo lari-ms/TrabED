@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../include/utils.h"
 
-int verifica_cpf(char* cpf){ //1 - valido   | 0 - invalido
+int valida_cpf(char* cpf){ //1 - valido   | 0 - invalido
     int soma = 0;
     for (int index=0; index<9; index++){
         int m = 10-index;
@@ -45,15 +45,15 @@ int verifica_cpf(char* cpf){ //1 - valido   | 0 - invalido
 }
 
 
-/*
+
+
 int main(){
 
     char cpf[12];
     scanf("%s", &cpf);
     printf("%s\n", cpf);
-    int valido = verifica_cpf(cpf);
+    int valido = valida_cpf(cpf);
     printf("%s: %d\n", cpf, valido);
 
     return 0;
 }
-*/
