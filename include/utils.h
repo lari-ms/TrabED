@@ -1,1 +1,1 @@
-int verifica_cpf(char* cpf);
+int valida_cpf(char* cpf);

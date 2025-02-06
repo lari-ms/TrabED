@@ -24,3 +24,22 @@ void imprimir_lista(Lista *lista){
         node->info_paciente->Data_cadastro);
     }
 }
+
+void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
+    //criando novo nó
+    Node *node = (Node*)malloc(sizeof(Node));
+    node->info_paciente = paciente;
+    
+    if (lista_pacientes->qtd == 0){
+        node->anterior = NULL;
+        lista_pacientes->primeiro = node;
+    } else{
+        node->anterior = lista_pacientes->ultimo;
+        lista_pacientes->ultimo->proximo = node;
+    }
+    node->proximo = NULL;
+    lista_pacientes->ultimo = node;
+
+    /////////// ADD REGISTRO DO PACIENTE NO ARQUIVO CSV
+    
+}
