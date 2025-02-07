@@ -16,4 +16,7 @@ typedef struct lista_pacientes{
 
 } Lista;
 
+Lista* cria_lista_pacientes();
+void imprimir_lista(Lista *lista);
+void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
 #endif
