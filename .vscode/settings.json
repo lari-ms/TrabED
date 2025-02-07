@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "stdio.h": "c",
-        "paciente.h": "c",
-        "string.h": "c",
-        "utils.h": "c",
-        "bd_paciente.h": "c"
-    }
-}
