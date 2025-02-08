@@ -4,7 +4,7 @@
 #include "..\include\paciente.h"
 #include "..\include\bd_paciente.h"
 #include "..\include\utils.h"
-
+/*
 Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, Lista* lista_pacientes){
     Paciente *ptr_novo_paciente = (Paciente*)malloc(sizeof(Paciente));
     
@@ -14,23 +14,23 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
         free(ptr_novo_paciente);
         return NULL;
     }
-
-    sprintf(ptr_novo_paciente->Cpf, "%.3s.%.3s.%.3s-%.3s", cpf, cpf+3, cpf+6, cpf+9);
-    if (busca_paciente_cpf(ptr_novo_paciente->Cpf, lista_pacientes) != NULL){//se nao houver nenhum cpf cadastrado
+    sprintf(ptr_novo_paciente->cpf, "%.3s.%.3s.%.3s-%.3s", cpf, cpf+3, cpf+6, cpf+9);
+    if (busca_paciente_cpf(ptr_novo_paciente->cpf, lista_pacientes) != NULL){//se nao houver nenhum cpf cadastrado
         printf("CPF já cadastrado!");
         return NULL;
     }
     
     if (strlen(data_cadastro) < 11) {
-        strcpy(ptr_novo_paciente->Data_cadastro, data_cadastro);
+        strcpy(ptr_novo_paciente->data_cadastro, data_cadastro);
     } else {
         printf("Formato de data inválido!\n");
         free(ptr_novo_paciente);
         return NULL;
     }
 
-    ptr_novo_paciente->Idade = idade;
-    ptr_novo_paciente->Nome = strdup(nome);
+    ptr_novo_paciente->idade = idade;
+
+    strcpy(ptr_novo_paciente->nome, nome);
 
     return ptr_novo_paciente;
 }
@@ -43,7 +43,7 @@ Paciente* busca_paciente_cpf(char* cpf, Lista *lista){
     Node *node = lista->primeiro;
 
     while(node != NULL){
-        if (strcmp(node->info_paciente->Cpf, cpf)==0){
+        if (strcmp(node->info_paciente->cpf, cpf)==0){
             return node->info_paciente;
         }
         node = node->proximo;
@@ -57,7 +57,7 @@ Lista* busca_paciente_nome(char* nome, Lista *lista){
     Node *node = lista->primeiro;
 
     while(node != NULL){
-        if (strstr(node->info_paciente->Nome, nome) != NULL){
+        if (strstr(node->info_paciente->nome, nome) != NULL){
             inserir_paciente_lista(node->info_paciente, pacientes_encontrados);
         }
         node = node->proximo;
@@ -89,7 +89,7 @@ Lista* busca_paciente_nome(char* nome, Lista *lista){
         break; //chamar a funcao de novo?
     }
 }*/
-
+/*
 int main(){
     Lista *lista_pacientes = cria_lista_pacientes();
     char cpf[] = "18376163701";
@@ -103,3 +103,4 @@ int main(){
 
     return 0;
 }
+*/
