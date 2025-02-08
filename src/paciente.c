@@ -16,7 +16,7 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
     }
 
     sprintf(ptr_novo_paciente->Cpf, "%.3s.%.3s.%.3s-%.3s", cpf, cpf+3, cpf+6, cpf+9);
-    if (busca_paciente_cpf(ptr_novo_paciente->Cpf, lista_pacientes) != NULL){//se nao houver nenhum cpf cadastrado
+    if (consulta_cpf(ptr_novo_paciente->Cpf, lista_pacientes) != NULL){//se nao houver nenhum cpf cadastrado
         printf("CPF já cadastrado!");
         return NULL;
     }
@@ -35,24 +35,49 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
     return ptr_novo_paciente;
 }
 
-Paciente* busca_paciente_cpf(char* cpf, Lista *lista){
+void imprime_paciente(Paciente *paciente){
+    if (paciente != NULL){
+        printf("ID    CPF          Nome                 Idade      Data_Cadastro\n");
+        printf("%d     %s          %s       %d      %s\n",
+            paciente->Id,
+            paciente->Cpf,
+            paciente->Nome,
+            paciente->Idade,
+            paciente->Data_cadastro);
+    } else {
+        printf("paciente não registrado\n");
+    }
     
+}
+
+Paciente* consulta_cpf(char* cpf, Lista *lista){
+    char cpf_formatado[15];
+    if (strlen(cpf)<14){
+        sprintf(cpf_formatado, "%.3s.%.3s.%.3s-%.3s", cpf, cpf+3, cpf+6, cpf+9);
+    } else {
+        strcpy(cpf_formatado, cpf);
+    }
+    
+    //printf("cpf: %s  |  cpf formatado: %s", cpf, cpf_formatado);
     if (lista->qtd == 0){
-        return NULL;
+        printf("Lista vazia\n");
+        return;
     }
     Node *node = lista->primeiro;
 
     while(node != NULL){
-        if (strcmp(node->info_paciente->Cpf, cpf)==0){
+        //printf("\ndentro do while:\n %s != %s", cpf_formatado, node->info_paciente->Cpf);
+        if (strcmp(node->info_paciente->Cpf, cpf_formatado)==0){
+            //printf("entrou no if");
             return node->info_paciente;
         }
         node = node->proximo;
     }
-
-    return NULL;
+    printf("CPF nao registrado\n");
+    return;
 }
 
-Lista* busca_paciente_nome(char* nome, Lista *lista){
+Lista* consulta_nome(char* nome, Lista *lista){
     Lista *pacientes_encontrados = cria_lista_pacientes();
     Node *node = lista->primeiro;
 
@@ -66,12 +91,14 @@ Lista* busca_paciente_nome(char* nome, Lista *lista){
     return pacientes_encontrados;
 }
 
-/*Paciente* consultar_paciente(int modo_busca, Lista *lista_pacientes){
+/*void consultar_paciente(int modo_busca, Lista *lista_pacientes){
+    printf("escolha o modo de consulta:\n1 - por nome\n2 - por cpf\n 3 - retornar ao menu principal\n\n");
+    modo_
     switch (modo_busca)
     {
     case 1://nome
         char cpf;
-        cpf[12] = "12345678900";
+        //cpf[12] = "12345678900";
 
         Lista *resultado_busca = busca_paciente_cpf(cpf, lista_pacientes);
         break;
@@ -90,16 +117,61 @@ Lista* busca_paciente_nome(char* nome, Lista *lista){
     }
 }*/
 
-int main(){
-    Lista *lista_pacientes = cria_lista_pacientes();
-    char cpf[] = "18376163701";
-    char cpf_errado[] = "18376163700";
-    char nome[] = "lari a Lari";
-    int idade = 60;
-    char data[] = "06-05-200005";
-    Paciente *paciente = cria_paciente(cpf, nome, idade, data, lista_pacientes);
-    inserir_paciente_lista(paciente, lista_pacientes);
-    imprimir_lista(lista_pacientes);
+void remover_paciente(int id, Lista *lista){
+    
+    
+    
+    Node *node = lista->primeiro;
 
-    return 0;
-}
+    //busca a id escolhida
+    while (node != NULL){
+        if (node->info_paciente->Id == id){
+
+            printf("\nTem certeza de que deseja excluir o registro abaixo? (S/N)\n\n");
+            imprime_paciente(node->info_paciente); printf("\n");
+            char remover; char encerrar = 'N';
+            scanf("%c", &remover);
+            if (remover == encerrar){
+                return;
+            }
+
+            //se node for o primeiro elemento da lista
+            if (node == lista->primeiro){
+                //printf("\nentrou no segundo if\n");
+                lista->primeiro = node->proximo;
+                //printf("executou a linha depois do segundo if\n");
+                //se tiver proximo elemento
+                if (node->proximo != NULL){
+                    //printf("entrou no terceiro if\n");
+                    lista->primeiro->anterior = NULL;
+                    //printf("executou a linha depois do terceiro if\n");
+                }
+            }
+            //se o node for o ultimo elemento da lista
+            if (node == lista->ultimo){
+                //printf("\nentrou no quarto if\n");
+                lista->ultimo = node->anterior;
+                //se tiver elemento anterior
+                if (lista->ultimo != NULL){
+                    lista->ultimo->proximo = NULL;
+                }
+            }
+
+            //se ele estiver entre dois elementos
+            if (node->anterior != NULL && node->proximo != NULL) {
+                //printf("\nentrou no ultimo if\n");
+                node->anterior->proximo = node->proximo;
+                node->proximo->anterior = node->anterior;
+            }
+
+            
+            free(node->info_paciente);
+            free(node);
+
+            printf("\nRegistro removido com sucesso.\n");
+            return;
+        }
+        node = node->proximo;
+    }
+    return;
+}    
