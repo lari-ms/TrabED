@@ -14,14 +14,14 @@ Lista* cria_lista_pacientes(){
 
 void imprimir_lista(Lista *lista){
 
-    printf("Imprimindo lista de pacientes...\nID    CPF          Nome                 Idade      Data_Cadastro");
+    printf("\nID    CPF          Nome                 Idade      Data_Cadastro");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
         printf("\n%d     %s          %s       %d      %s",
-        node->info_paciente->id,
-        node->info_paciente->cpf,
-        node->info_paciente->nome,
-        node->info_paciente->idade,
-        node->info_paciente->data_cadastro);
+        node->info_paciente->Id,
+        node->info_paciente->Cpf,
+        node->info_paciente->Nome,
+        node->info_paciente->Idade,
+        node->info_paciente->Data_cadastro);
     }
 }
 
@@ -39,7 +39,11 @@ void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
     }
     node->proximo = NULL;
     lista_pacientes->ultimo = node;
-    node->info_paciente->id = ++lista_pacientes->qtd;
-    printf("\nid: %d, quantidade de pacientes depois do novo cadastro: %d\n\n", node->info_paciente->id, lista_pacientes->qtd);
+    node->info_paciente->Id = ++lista_pacientes->qtd;
+    //printf("\nid: %d, quantidade de pacientes depois do novo cadastro: %d\n\n", node->info_paciente->Id, lista_pacientes->qtd);
 
+}
+
+int lista_vazia(Lista *lista){
+    return (lista->primeiro == NULL && lista->ultimo == NULL);
 }

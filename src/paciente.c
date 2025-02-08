@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include <string.h>
 #include "..\include\paciente.h"
 #include "..\include\bd_paciente.h"
@@ -30,7 +31,7 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
     }
 
     ptr_novo_paciente->Idade = idade;
-    ptr_novo_paciente->Nome = strdup(nome);
+    strcpy(ptr_novo_paciente->Nome, nome);
 
     return ptr_novo_paciente;
 }
@@ -59,10 +60,10 @@ Paciente* consulta_cpf(char* cpf, Lista *lista){
     }
     
     //printf("cpf: %s  |  cpf formatado: %s", cpf, cpf_formatado);
-    if (lista->qtd == 0){
+    /*if (lista->qtd == 0){
         printf("Lista vazia\n");
         return;
-    }
+    }*/
     Node *node = lista->primeiro;
 
     while(node != NULL){
@@ -74,7 +75,7 @@ Paciente* consulta_cpf(char* cpf, Lista *lista){
         node = node->proximo;
     }
     printf("CPF nao registrado\n");
-    return;
+    return NULL;
 }
 
 Lista* consulta_nome(char* nome, Lista *lista){
@@ -85,42 +86,74 @@ Lista* consulta_nome(char* nome, Lista *lista){
         if (strstr(node->info_paciente->Nome, nome) != NULL){
             inserir_paciente_lista(node->info_paciente, pacientes_encontrados);
         }
+        //imprime_paciente(node->info_paciente);
         node = node->proximo;
     }
 
     return pacientes_encontrados;
 }
 
-/*void consultar_paciente(int modo_busca, Lista *lista_pacientes){
-    printf("escolha o modo de consulta:\n1 - por nome\n2 - por cpf\n 3 - retornar ao menu principal\n\n");
-    modo_
-    switch (modo_busca)
-    {
-    case 1://nome
-        char cpf;
-        //cpf[12] = "12345678900";
+Paciente* consulta_id(int id, Lista *lista){
+    Node *node = lista->primeiro;
 
-        Lista *resultado_busca = busca_paciente_cpf(cpf, lista_pacientes);
-        break;
-    
-    case 2: //nome
-        char nome[150] = "Mari";
-        Lista *resultado_busca = busca_paciente_nome(nome, lista_pacientes);
-
-
-    case 3: //voltar pro menu
-        return;
-
-    default:
-        printf("Modo inválido");
-        break; //chamar a funcao de novo?
+    while (node != NULL){
+        if (node->info_paciente->Id == id){
+            return node->info_paciente;
+        }
+        node = node->proximo;
     }
-}*/
+    printf("Nenhum paciente encontrado.\n\n");
+    return NULL;
+}
+
+void consultar_paciente(Lista *lista_pacientes){
+    printf("escolha o modo de consulta:\n1 - por nome\n2 - por cpf\n 3 - retornar ao menu principal\n\n");
+    int modo_busca;
+    scanf("%d", &modo_busca);
+
+    //busca por nome
+    if (modo_busca == 1){
+        char nome[101];
+        printf("Digite o nome\n\n");
+        scanf("%s", nome);
+        printf("\n");
+        Lista *pacientes_encontrados = consulta_nome(nome, lista_pacientes);
+        if (lista_vazia(pacientes_encontrados)){
+            printf("Nenhum paciente foi encontrado.\n\n");
+            return;
+        }
+        imprimir_lista(pacientes_encontrados);
+        free(pacientes_encontrados);
+
+    //busca por cpf
+    } else if ( modo_busca == 2){
+        char cpf[12];
+        printf("Digite o CPF:\n\n");
+        scanf("%s", cpf);
+
+        if (!valida_cpf(cpf)){
+            printf("CPF inválido.\n\n");
+            return;
+        }
+
+        Paciente *paciente_encontrado = consulta_cpf(cpf, lista_pacientes);
+        if (paciente_encontrado == NULL){
+            printf("Nenhum paciente foi encontrado.\n\n");
+            return;
+        }
+
+        imprime_paciente(paciente_encontrado);
+        free(paciente_encontrado);
+    
+    }else if (modo_busca == 3){
+        return;
+    }
+    
+    }
+
 
 void remover_paciente(int id, Lista *lista){
-    
-    
-    
+
     Node *node = lista->primeiro;
 
     //busca a id escolhida
@@ -129,12 +162,12 @@ void remover_paciente(int id, Lista *lista){
 
             printf("\nTem certeza de que deseja excluir o registro abaixo? (S/N)\n\n");
             imprime_paciente(node->info_paciente); printf("\n");
-            char remover; char encerrar = 'N';
+            char remover; //char encerrar = 'N';
             scanf("%c", &remover);
-            if (remover == encerrar){
+            if (toupper(remover) == 'N'){
                 return;
-            }
-
+            } else if(toupper(remover) == 'S'){
+                
             //se node for o primeiro elemento da lista
             if (node == lista->primeiro){
                 //printf("\nentrou no segundo if\n");
@@ -170,8 +203,54 @@ void remover_paciente(int id, Lista *lista){
 
             printf("\nRegistro removido com sucesso.\n");
             return;
+            } else {
+                printf("Opção inválida.\n");
+                return;
+            }
         }
         node = node->proximo;
     }
     return;
 }    
+/*
+Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e
+Data_Cadastro, separados por espaços (para manter o valor atual de um campo, digite ’-’):
+*/
+void atualizar_paciente(Paciente *paciente,
+    char* novo_cpf,
+    char* novo_nome,
+    char* nova_idade,
+    char* nova_data_cadastro,
+    Lista *lista){
+    if (strcmp(novo_cpf, '-') != 0){
+        strcpy(paciente->Cpf,novo_cpf);
+    }
+
+    if (strcmp(novo_cpf, '-') != 0){
+        char cpf_formatado[15];
+        sprintf(cpf_formatado, "%.3s.%.3s.%.3s-%.3s", novo_cpf, novo_cpf+3, novo_cpf+6, novo_cpf+9);
+
+        if (!novo_cpf){
+            printf("CPF inválido!\n");
+            return NULL;
+        }
+        
+        else if (consulta_cpf(cpf_formatado, lista) != NULL){//se o novo cpf ja estiver cadastrado
+            printf("CPF já cadastrado!");
+            return NULL;
+        }
+        sprintf(paciente->Cpf, cpf_formatado);
+
+    }if (strcmp(nova_data_cadastro, '-') != 0){
+        if (strlen(nova_data_cadastro) < 11) {
+            strcpy(paciente->Data_cadastro, nova_data_cadastro);
+        } else {
+            printf("Formato de data inválido!\n");
+            return NULL;
+        }
+
+    }if (strcmp(nova_idade, '-') != 0){
+        nova_idade = nova_idade - '0';
+        paciente->Idade = nova_idade;
+    }
+}

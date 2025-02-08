@@ -27,14 +27,11 @@ int main(){
     char nomeai[] = "a";
     Lista *encontrados = cria_lista_pacientes();
     remover_paciente(1, lista_pacientes);
-    imprimir_lista(lista_pacientes);
+    //imprimir_lista(lista_pacientes);
 
-    char cpf3[] = "01752563735";
-    char nome3[] = "marta";
-    int idade3 = 20;
-    char data3[] = "06-05-2205";
-    Paciente *paciente3 = cria_paciente(cpf_errado2, nome3, idade3, data3, lista_pacientes);
-    imprimir_lista(lista_pacientes);
+    consultar_paciente(lista_pacientes);
+    char novo_cpf[]= "01752573766"; char novo_nome[] = "vovo"; char nova_idade[] = "-"; char nova_data[] = "-";
+    atualizar_paciente(consulta_id(2, lista_pacientes), novo_cpf, novo_nome, nova_idade, nova_data, lista_pacientes);
     return 0;
 }
 
