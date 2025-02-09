@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "../include/utils.h"
 
 int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
@@ -42,6 +43,20 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
         return (cpf[10])-'0' == verificador2;
     }
 
+}
+
+void exibe_menu(){
+    printf("HealthSys\n\n1 - Consultar paciente\n2 - Atualizar paciente\n3 - Remover paciente\n4 - Inserir paciente\n5 - Imprimir lista de pacientes\nQ- Sair\n\n");
+}
+
+int contemNumero(const char* str) {
+    while (*str) {
+        if (isdigit(*str)) {
+            return 1;//retorna 1 se nao houver numero
+        }
+        str++;
+    }
+    return 0;//retorna 0 se houver numero
 }
 
 

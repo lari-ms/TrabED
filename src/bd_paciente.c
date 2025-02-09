@@ -12,8 +12,11 @@ Lista* cria_lista_pacientes(){
     return ptr_nova_lista; //retorna o PONTEIRO pra lista
 }
 
-void imprimir_lista(Lista *lista){
+int tamanho_lista(Lista *lista){
+    return lista->qtd;
+}
 
+void imprimir_lista(Lista *lista){
     printf("\nID    CPF          Nome                 Idade      Data_Cadastro");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
         printf("\n%d     %s          %s       %d      %s",
@@ -23,6 +26,7 @@ void imprimir_lista(Lista *lista){
         node->info_paciente->Idade,
         node->info_paciente->Data_cadastro);
     }
+    printf("\n\n");
 }
 
 void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
@@ -39,7 +43,7 @@ void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
     }
     node->proximo = NULL;
     lista_pacientes->ultimo = node;
-    node->info_paciente->Id = ++lista_pacientes->qtd;
+    //node->info_paciente->Id = ++lista_pacientes->qtd;
     //printf("\nid: %d, quantidade de pacientes depois do novo cadastro: %d\n\n", node->info_paciente->Id, lista_pacientes->qtd);
 
 }

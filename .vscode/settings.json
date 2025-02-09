@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "string.h": "c",
+        "stdlib.h": "c",
+        "paciente.h": "c",
+        "utils.h": "c",
+        "bd_paciente.h": "c",
+        "arquivo.h": "c"
+    }
+}

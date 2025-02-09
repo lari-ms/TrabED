@@ -20,7 +20,7 @@ void cadastrar_paciente(Lista *lista_pacientes){
     scanf("%d", &idade);
     printf("Digite a data de cadastro do paciente: ");
     scanf("%s", data_cadastro);
-    int id = lista_pacientes->qtd + 1; // Assuming id is the next available id
+    int id = ++lista_pacientes->qtd; // Assuming id is the next available id
     Paciente *novo_paciente = arq_criar_paciente(id, cpf, nome, idade, data_cadastro);
     inserir_paciente_lista(novo_paciente, lista_pacientes);
 }
@@ -29,11 +29,11 @@ void arq_inserir_lista(Lista *lista, FILE *arquivo){
     fprintf(arquivo, "id,cpf,nome,idade,data_cadastro\n");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
         fprintf(arquivo, "%d,%s,%s,%d,%s\n",
-        node->info_paciente->id,
-        node->info_paciente->cpf,
-        node->info_paciente->nome,
-        node->info_paciente->idade,
-        node->info_paciente->data_cadastro);
+        node->info_paciente->Id,
+        node->info_paciente->Cpf,
+        node->info_paciente->Nome,
+        node->info_paciente->Idade,
+        node->info_paciente->Data_cadastro);
     }
 }
 
@@ -43,18 +43,18 @@ Paciente* arq_criar_paciente(int id, const char *cpf, const char *nome, int idad
         perror("Erro ao alocar memória para paciente");
         return NULL;
     }
-    novo->id = id;
+    novo->Id = id;
 
-    strncpy(novo->cpf, cpf, sizeof(novo->cpf) - 1);
-    novo->cpf[sizeof(novo->cpf) - 1] = '\0';
+    strncpy(novo->Cpf, cpf, sizeof(novo->Cpf) - 1);
+    novo->Cpf[sizeof(novo->Cpf) - 1] = '\0';
 
-    strncpy(novo->nome, nome, sizeof(novo->nome) - 1);
-    novo->nome[sizeof(novo->nome) - 1] = '\0';
+    strncpy(novo->Nome, nome, sizeof(novo->Nome) - 1);
+    novo->Nome[sizeof(novo->Nome) - 1] = '\0';
 
-    novo->idade = idade;
+    novo->Idade = idade;
 
-    strncpy(novo->data_cadastro, data_cadastro, sizeof(novo->data_cadastro) - 1);
-    novo->data_cadastro[sizeof(novo->data_cadastro) - 1] = '\0';
+    strncpy(novo->Data_cadastro, data_cadastro, sizeof(novo->Data_cadastro) - 1);
+    novo->Data_cadastro[sizeof(novo->Data_cadastro) - 1] = '\0';
 
     return novo;
 }
@@ -72,6 +72,7 @@ Lista *arq_ler_pacientes(const char *nome_arquivo) {
     fgets(linha, MAX_LINHA, arquivo);
 
     while (fgets(linha, sizeof(linha), arquivo)) {
+        printf("%s", linha);
         int id, idade;
         char cpf[15], nome[100], data_cadastro[11];
         if (sscanf(linha, "%d,%14[^,],%99[^,],%d,%10[^,\n]", &id, cpf, nome, &idade, data_cadastro) == 5) {
