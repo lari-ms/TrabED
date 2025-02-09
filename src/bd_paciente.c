@@ -43,7 +43,7 @@ void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
     }
     node->proximo = NULL;
     lista_pacientes->ultimo = node;
-    //node->info_paciente->Id = ++lista_pacientes->qtd;
+    node->info_paciente->Id = ++lista_pacientes->qtd;
     //printf("\nid: %d, quantidade de pacientes depois do novo cadastro: %d\n\n", node->info_paciente->Id, lista_pacientes->qtd);
 
 }

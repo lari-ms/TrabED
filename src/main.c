@@ -12,9 +12,12 @@ int main(){
     //criar a lista com os pacientes do arquivo
     const char *nome_arq = "database\\bd_paciente.csv";
     Lista *lista_pacientes = arq_ler_pacientes(nome_arq);
-    printf("%d", tamanho_lista(lista_pacientes));
+    printf("%d", lista_pacientes->qtd);
     imprimir_lista(lista_pacientes);
-   
+    atualizar_paciente(lista_pacientes);
+    imprimir_lista(lista_pacientes);
+    remover_paciente(lista_pacientes);
+    arq_inserir_lista(lista_pacientes, nome_arq);
     /*int run = 0;
     while(run==0){
         exibe_menu();

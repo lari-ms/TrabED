@@ -9,6 +9,8 @@
 Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, Lista* lista_pacientes){
     Paciente *ptr_novo_paciente = (Paciente*)malloc(sizeof(Paciente));
     
+    
+
     int cpf_valido = valida_cpf(cpf);
     if (!cpf_valido){
         printf("CPF inválido!\n");
@@ -85,7 +87,9 @@ Lista* consulta_nome(char* nome, Lista *lista){
 
     while(node != NULL){
         if (strstr(node->info_paciente->Nome, nome) != NULL){
+            int id_original = node->info_paciente->Id;
             inserir_paciente_lista(node->info_paciente, pacientes_encontrados);
+            node->info_paciente->Id = id_original;
         }
         node = node->proximo;
     }
@@ -148,14 +152,32 @@ int consultar_paciente(Lista *lista_pacientes){//retorna 0 nao houver erro ou -1
         return 0;
 
     }else if (modo_busca == 3){
-        printf("la");
+        return -1;
+    } else {
+        
         return -1;
     }
     return 0; //deu tudo certo
     }
 
 
-void remover_paciente(int id, Lista *lista){
+void remover_paciente(Lista *lista){
+    if (consultar_paciente(lista)!=0){//verifica excecoes
+        printf("\nOperacao cancelada.\n\n");
+        return;
+        
+    }
+    printf("Digite o ID do paciente a ser excluído:\n\n");
+    char id_str[10];
+    int id;
+    scanf("%s", id_str); 
+    id = atoi(id_str);
+
+    Paciente *paciente = consulta_id(id ,lista);
+    if (paciente == NULL) {//caso o ID não seja encontrado, cancela a atualização
+        //printf("Paciente com ID %d não encontrado.\n", id);
+        return;
+    }
 
     Node *node = lista->primeiro;
 
@@ -218,7 +240,7 @@ void remover_paciente(int id, Lista *lista){
 
 
 void atualizar_paciente(Lista *lista){
-    if (consultar_paciente(lista)==-1){
+    if (consultar_paciente(lista)!=0){
         printf("\nOperacao cancelada.\n\n");
         return;
         
@@ -231,11 +253,11 @@ void atualizar_paciente(Lista *lista){
 
     Paciente *paciente = consulta_id(id ,lista);
     if (paciente == NULL) {//caso o ID não seja encontrado, cancela a atualização
-        printf("Paciente com ID %d não encontrado.\n", id);
+        //printf("Paciente com ID %d não encontrado.\n", id);
         return;
     }
 
-    printf("Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e Data_Cadastro,\nseparados por espaços (para manter o valor atual de um campo, digite '- '):\n\n");
+    printf("Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e Data_Cadastro,\nseparados por espaços (para manter o valor atual de um campo, digite '-'):\n\n");
     
     char novo_cpf[15]; char novo_nome[101]; char nova_idade[4]; char nova_data_cadastro[11];
     scanf("%s", novo_cpf); scanf("%s", novo_nome); scanf("%s", nova_idade); scanf("%s", nova_data_cadastro);

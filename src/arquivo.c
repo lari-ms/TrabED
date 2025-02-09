@@ -25,7 +25,13 @@ void cadastrar_paciente(Lista *lista_pacientes){
     inserir_paciente_lista(novo_paciente, lista_pacientes);
 }
 
-void arq_inserir_lista(Lista *lista, FILE *arquivo){
+void arq_inserir_lista(Lista *lista, const char *nome_arquivo){
+    FILE *arquivo = fopen(nome_arquivo, "w");
+    if (!arquivo) {
+        perror("Erro ao abrir arquivo");
+        return;
+    }
+
     fprintf(arquivo, "id,cpf,nome,idade,data_cadastro\n");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
         fprintf(arquivo, "%d,%s,%s,%d,%s\n",
@@ -35,6 +41,7 @@ void arq_inserir_lista(Lista *lista, FILE *arquivo){
         node->info_paciente->Idade,
         node->info_paciente->Data_cadastro);
     }
+    fclose(arquivo); 
 }
 
 Paciente* arq_criar_paciente(int id, const char *cpf, const char *nome, int idade, const char *data_cadastro) {
@@ -72,7 +79,6 @@ Lista *arq_ler_pacientes(const char *nome_arquivo) {
     fgets(linha, MAX_LINHA, arquivo);
 
     while (fgets(linha, sizeof(linha), arquivo)) {
-        printf("%s", linha);
         int id, idade;
         char cpf[15], nome[100], data_cadastro[11];
         if (sscanf(linha, "%d,%14[^,],%99[^,],%d,%10[^,\n]", &id, cpf, nome, &idade, data_cadastro) == 5) {

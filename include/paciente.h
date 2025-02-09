@@ -14,7 +14,7 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
 int consultar_paciente(Lista *lista_pacientes);//retorna -1 se algo der errado ou 0 se houver sucesso
 void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
 Paciente* consulta_cpf(char* cpf, Lista *lista);
-void remover_paciente(int id, Lista *lista);
+void remover_paciente(Lista *lista);
 int lista_vazia(Lista *lista);
 void atualizar_paciente(Lista *lista);/*
     Paciente *paciente,
