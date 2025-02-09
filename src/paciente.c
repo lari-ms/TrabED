@@ -256,11 +256,15 @@ void atualizar_paciente(Lista *lista){
         //printf("Paciente com ID %d não encontrado.\n", id);
         return;
     }
-
-    printf("Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e Data_Cadastro,\nseparados por espaços (para manter o valor atual de um campo, digite '-'):\n\n");
     
+    
+
+    printf("Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e Data_Cadastro,");
+    printf("separados por espaços (para manter o valor atual de um campo, digite '-'):\n\n");
+
     char novo_cpf[15]; char novo_nome[101]; char nova_idade[4]; char nova_data_cadastro[11];
     scanf("%s", novo_cpf); scanf("%s", novo_nome); scanf("%s", nova_idade); scanf("%s", nova_data_cadastro);
+
 
     if (strcmp(novo_cpf, "-") != 0){
         char cpf_formatado[15];
@@ -298,5 +302,5 @@ void atualizar_paciente(Lista *lista){
     }if (strcmp(nova_idade, "-") != 0){
         paciente->Idade = atoi(nova_idade);
     }
-    imprime_paciente(paciente);
+    
 }
