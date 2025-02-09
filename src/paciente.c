@@ -38,17 +38,15 @@ Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, L
 
 void imprime_paciente(Paciente *paciente){
     if (paciente != NULL){
-        printf("ID    CPF          Nome                 Idade      Data_Cadastro\n");
-        printf("%d     %s          %s       %d      %s\n",
-            paciente->Id,
-            paciente->Cpf,
-            paciente->Nome,
-            paciente->Idade,
-            paciente->Data_cadastro);
+        printf("ID: %d\n", paciente->Id);
+        printf("CPF: %s\n", paciente->Cpf);
+        printf("Nome: %s\n", paciente->Nome);
+        printf("Idade: %d\n", paciente->Idade);
+        printf("Data de Cadastro: %s\n", paciente->Data_cadastro);
+        printf("-------------------------------\n");
     } else {
-        printf("paciente não registrado\n");
+        printf("Paciente não registrado\n");
     }
-    
 }
 
 Paciente* consulta_cpf(char* cpf, Lista *lista){
@@ -107,13 +105,13 @@ Paciente* consulta_id(int id, Lista *lista){
 }
 
 void consultar_paciente(Lista *lista_pacientes){
-    printf("escolha o modo de consulta:\n1 - por nome\n2 - por cpf\n 3 - retornar ao menu principal\n\n");
+    printf("Escolha o modo de consulta:\n1 - por nome\n2 - por CPF\n3 - retornar ao menu principal\n\n");
     int modo_busca;
     scanf("%d", &modo_busca);
 
-    //busca por nome
+    // Busca por nome
     if (modo_busca == 1){
-        char nome[101];
+        char nome[100];
         printf("Digite o nome\n\n");
         scanf("%s", nome);
         printf("\n");
@@ -125,9 +123,9 @@ void consultar_paciente(Lista *lista_pacientes){
         imprimir_lista(pacientes_encontrados);
         free(pacientes_encontrados);
 
-    //busca por cpf
-    } else if ( modo_busca == 2){
-        char cpf[12];
+    // Busca por CPF
+    } else if (modo_busca == 2){
+        char cpf[11];
         printf("Digite o CPF:\n\n");
         scanf("%s", cpf);
 
@@ -143,14 +141,13 @@ void consultar_paciente(Lista *lista_pacientes){
         }
 
         imprime_paciente(paciente_encontrado);
-        free(paciente_encontrado);
-    
-    }else if (modo_busca == 3){
-        return;
-    }
-    
-    }
 
+    } else if (modo_busca == 3){
+        return;
+    } else {
+        printf("Opção inválida.\n");
+    }
+}
 
 void remover_paciente(int id, Lista *lista){
 

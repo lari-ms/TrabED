@@ -13,16 +13,16 @@ Lista* cria_lista_pacientes(){
 }
 
 void imprimir_lista(Lista *lista){
-
-    printf("\nID    CPF          Nome                 Idade      Data_Cadastro");
+    printf("\n%-5s %-15s %-20s %-7s %-15s", "ID", "CPF", "Nome", "Idade", "Data_Cadastro");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
-        printf("\n%d     %s          %s       %d      %s",
+        printf("\n%-5d %-15s %-100s %-7d %-15s",
         node->info_paciente->Id,
         node->info_paciente->Cpf,
         node->info_paciente->Nome,
         node->info_paciente->Idade,
         node->info_paciente->Data_cadastro);
     }
+    printf("\n");
 }
 
 void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){

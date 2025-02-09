@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/utils.h"
+#include <bd_paciente.h>
 
 int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
     int soma = 0;
@@ -43,6 +44,59 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
     }
 
 }
+
+void Menu(){
+
+    Lista *lista_pacientes = arq_ler_pacientes("../bd_paciente.csv");
+    
+    printf("\n=====================\n");
+    printf("    MENU PRINCIPAL   \n");
+    printf("=====================\n");
+    printf("1 - Cadastrar paciente\n");
+    printf("2 - Consultar paciente\n");
+    printf("3 - Atualizar paciente\n");
+    printf("4 - Remover paciente\n");
+    printf("5 - Sair\n");
+    printf("=====================\n");
+    printf("Escolha uma opção: ");
+
+    int opcao;
+
+    while(1){
+    scanf("%d", &opcao);
+    switch (opcao){
+        case 1:
+            Paciente *novo_paciente = cria_paciente();
+            inserir_paciente_lista(novo_paciente, lista_pacientes);
+            break;
+        case 2:
+            consultar_paciente(lista_pacientes);
+            break;
+        case 3:
+            atualizar_paciente(lista_pacientes);
+            break;
+        case 4:
+            remover_paciente(lista_pacientes);
+            break;
+        case 5:
+            arq_inserir_lista(lista_pacientes, "../bd_paciente.csv");
+            return;
+        default:
+            printf("Opção inválida.\n");
+            break;
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,5 +23,6 @@ void atualizar_paciente(Paciente *paciente,
     char* nova_data_cadastro,
     Lista *lista);
 Paciente* consulta_id(int id, Lista *lista);
+void imprime_paciente(Paciente *paciente);
 
 #endif
