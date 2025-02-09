@@ -18,12 +18,18 @@ void cadastrar_paciente(Lista *lista_pacientes){
     scanf("%d", &Idade);
     printf("Digite a data de cadastro do paciente: ");
     scanf("%s", Data_cadastro);
-    int id = lista_pacientes->qtd + 1; // Assuming id is the next available id
+    int id = ++lista_pacientes->qtd; // Assuming id is the next available id
     Paciente *novo_paciente = arq_criar_paciente(id, Cpf, Nome, Idade, Data_cadastro);
     inserir_paciente_lista(novo_paciente, lista_pacientes);
 }
 
-void arq_inserir_lista(Lista *lista, FILE *arquivo){
+void arq_inserir_lista(Lista *lista, const char *nome_arquivo){
+    FILE *arquivo = fopen(nome_arquivo, "w");
+    if (!arquivo) {
+        perror("Erro ao abrir arquivo");
+        return;
+    }
+
     fprintf(arquivo, "id,cpf,nome,idade,data_cadastro\n");
     for (Node *node = lista->primeiro; node != NULL; node=node->proximo){
         fprintf(arquivo, "%d,%s,%s,%d,%s\n",
@@ -33,6 +39,7 @@ void arq_inserir_lista(Lista *lista, FILE *arquivo){
         node->info_paciente->Idade,
         node->info_paciente->Data_cadastro);
     }
+    fclose(arquivo); 
 }
 
 Paciente* arq_criar_paciente(int id, const char *cpf, const char *nome, int idade, const char *data_cadastro) {

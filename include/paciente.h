@@ -11,18 +11,19 @@ typedef struct paciente{
 } Paciente;
 
 Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, Lista* lista_pacientes);
-void consultar_paciente(Lista *lista_pacientes);
+int consultar_paciente(Lista *lista_pacientes);//retorna -1 se algo der errado ou 0 se houver sucesso
 void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
 Paciente* consulta_cpf(char* cpf, Lista *lista);
-void remover_paciente(int id, Lista *lista);
+void remover_paciente(Lista *lista);
 int lista_vazia(Lista *lista);
-void atualizar_paciente(Paciente *paciente,
+void atualizar_paciente(Lista *lista);/*
+    Paciente *paciente,
     char* novo_cpf,
     char* novo_nome,
     char* nova_idade,
     char* nova_data_cadastro,
-    Lista *lista);
+    Lista *lista);*/
 Paciente* consulta_id(int id, Lista *lista);
+Lista* consulta_nome(char* nome, Lista *lista);
 void imprime_paciente(Paciente *paciente);
-
 #endif

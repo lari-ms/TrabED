@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Iinclude
 
 # Source files
-SRCS = src/bd_paciente.c src/main.c src/paciente.c src/utils.c 
+SRCS = src/bd_paciente.c src/main.c src/paciente.c src/utils.c src/arquivo.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
