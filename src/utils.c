@@ -80,7 +80,7 @@ void Menu(){
             remover_paciente(lista_pacientes);
             break;
         case 5:
-            arq_inserir_lista(lista_pacientes, "../bd_paciente.csv");
+            arq_inserir_lista(lista_pacientes, "../database/bd_paciente.csv");
             return;
         default:
             printf("Opção inválida.\n");

@@ -240,65 +240,83 @@ void remover_paciente(Lista *lista){
 void atualizar_paciente(Lista *lista){
     if (consultar_paciente(lista)!=0){
         printf("\nOperacao cancelada.\n\n");
-        return;
-        
+        return;        
     }
+
+    imprimir_lista(lista);
     printf("Digite o ID do paciente a ser atualizado:\n\n");
-    char id_str[10];
     int id;
-    scanf("%s", id_str); 
-    id = atoi(id_str);
+    scanf("%d", &id); 
 
     Paciente *paciente = consulta_id(id ,lista);
     if (paciente == NULL) {//caso o ID não seja encontrado, cancela a atualização
-        //printf("Paciente com ID %d não encontrado.\n", id);
+        printf("Paciente com ID %d não encontrado.\n", id);
         return;
     }
-    
-    
 
+    Paciente *paciente_atualizado = (Paciente*)malloc(sizeof(Paciente));
+    paciente_atualizado->Id = paciente->Id;
+    paciente_atualizado->Idade = paciente->Idade;
+    strcpy(paciente_atualizado->Cpf, paciente->Cpf);
+    strcpy(paciente_atualizado->Nome, paciente->Nome);
+    strcpy(paciente_atualizado->Data_cadastro, paciente->Data_cadastro);
+
+    printf("\n\n");
     printf("Digite o novo valor para os campos CPF (apenas dígitos), Nome, Idade e Data_Cadastro,");
     printf("separados por espaços (para manter o valor atual de um campo, digite '-'):\n\n");
 
     char novo_cpf[15]; char novo_nome[101]; char nova_idade[4]; char nova_data_cadastro[11];
-    scanf("%s", novo_cpf); scanf("%s", novo_nome); scanf("%s", nova_idade); scanf("%s", nova_data_cadastro);
-
+    scanf("%s", novo_cpf);
+    scanf("%s", novo_nome);
+    scanf("%s", nova_idade);
+    scanf("%s", nova_data_cadastro);
 
     if (strcmp(novo_cpf, "-") != 0){
         char cpf_formatado[15];
         sprintf(cpf_formatado, "%.3s.%.3s.%.3s-%.3s", novo_cpf, novo_cpf+3, novo_cpf+6, novo_cpf+9);
-
         if (!valida_cpf(novo_cpf)){
             printf("CPF inválido!\n");
-            return;
         }
-        
         else if (consulta_cpf(novo_cpf, lista) != NULL){//se o novo cpf ja estiver cadastrado
-            printf("CPF já cadastrado!");
-            return;
+            printf("CPF já cadastrado!\n");
         }
-        sprintf(paciente->Cpf, cpf_formatado);
+        else{
+            strcpy(paciente_atualizado->Cpf, cpf_formatado);
+        }
     }
     
     if (strcmp(novo_nome, "-") != 0){
         if (!contemNumero(novo_nome)){
-            strcpy(paciente->Nome, novo_nome);
+            strcpy(paciente_atualizado->Nome, novo_nome);
         } else {
             printf("Formato de nome inválido!\n");
-            return;
         }
-    
+    }
 
     if (strcmp(nova_data_cadastro, "-") != 0) {
         if (strlen(nova_data_cadastro) < 11) {
-            strcpy(paciente->Data_cadastro, nova_data_cadastro);
+            strcpy(paciente_atualizado->Data_cadastro, nova_data_cadastro);
         } else {
             printf("Formato de data inválido!\n");
-            return;
         }
     }
-    }if (strcmp(nova_idade, "-") != 0){
-        paciente->Idade = atoi(nova_idade);
+
+    if (strcmp(nova_idade, "-") != 0){
+        paciente_atualizado->Idade = atoi(nova_idade);
     }
-    
+
+    printf("Confirme os novos valores:\n\n");
+    imprime_paciente(paciente_atualizado);
+
+    printf("Deseja confirmar as alterações? (S/N)\n\n");
+    char confirmar;
+    scanf(" %c", &confirmar);
+    if (toupper(confirmar) == 'S'){
+        printf("Alterações confirmadas.\n");
+        *paciente = *paciente_atualizado;
+    } else {
+        printf("Alterações canceladas.\n");
+    }
+
+    free(paciente_atualizado);
 }
