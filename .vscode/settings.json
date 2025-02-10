@@ -2,6 +2,7 @@
     "files.associations": {
         "arquivo.h": "c",
         "bd_paciente.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "string.h": "c"
     }
 }

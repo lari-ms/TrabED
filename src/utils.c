@@ -7,8 +7,6 @@
 #include "../include/paciente.h"
 #include "../include/arquivo.h"
 
-
-
 void limpar_terminal() {
     #ifdef _WIN32
         system("cls");
@@ -16,7 +14,6 @@ void limpar_terminal() {
         system("clear");
     #endif
 }
-
 
 int contemNumero(const char* str){
     for (int i=0; i<strlen(str); i++){
@@ -74,12 +71,10 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
 }
 
 void Menu(){
-    printf("teste\n");
     Lista *lista_pacientes = arq_ler_pacientes("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv");
-    printf("teste\n");    
-    int opcao = 0;
+    char opcao = 0;
 
-    while(opcao != 5){
+    while(opcao != 'Q'){
 
         printf("\n=====================\n");
         printf("    MENU PRINCIPAL   \n");
@@ -88,28 +83,43 @@ void Menu(){
         printf("2 - Consultar paciente\n");
         printf("3 - Remover paciente\n");
         printf("4 - Atualizar paciente\n");
-        printf("5 - Sair\n");
+        printf("5 - Imprimir Lista\n");
+        printf("Q - Sair\n");
         printf("=====================\n");
         printf("Escolha uma opcao: ");
 
-        scanf("%d", &opcao);
+        scanf("%s", &opcao);
 
         printf("\n\n");
 
         switch (opcao){
-            case 1:
+            case '1':
+                limpar_terminal();
                 cadastrar_paciente(lista_pacientes);
                 break;
-            case 2:
-                consultar_paciente(lista_pacientes);
+            case '2': {
+                limpar_terminal();
+                Lista *lista_consulta = cria_lista_pacientes();
+                lista_consulta = consultar_paciente(lista_pacientes);
+                if (lista_consulta != NULL){
+                    imprimir_lista(lista_consulta);
+                    free(lista_consulta);
+                }
                 break;
-            case 3:
+            }
+            case '3':
+                limpar_terminal();
                 remover_paciente(lista_pacientes);
                 break;
-            case 4:
+            case '4':
+                limpar_terminal();
                 atualizar_paciente(lista_pacientes);
                 break;
-            case 5:
+            case '5':
+                limpar_terminal();
+                imprimir_lista(lista_pacientes);
+                break;
+            case 'Q':
                 printf("Fim da execucao\n");
                 break;
             default:
@@ -119,6 +129,4 @@ void Menu(){
     }
 
     arq_inserir_lista(lista_pacientes, "C:\\Users\\bield\\Documents\\Gabriel\\ED_Projeto\\TrabED\\database\\bd_paciente.csv");
-
-
 }

@@ -76,23 +76,3 @@ Lista *arq_ler_pacientes(const char *nome_arquivo) {
     fclose(arquivo);
     return lista;
 }
-/*
-int main(){
-    Lista *lista_teste = arq_ler_pacientes("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv");
-    if (lista_teste == NULL){
-        return 1;
-    }
-    imprimir_lista(lista_teste);
-    cadastrar_paciente(lista_teste);
-
-    FILE *arquivo = fopen("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv", "w");
-    if (!arquivo) {
-        perror("Erro ao abrir arquivo");
-        return 1;
-    }
-    arq_inserir_lista(lista_teste, arquivo);
-    fclose(arquivo);
-
-    return 0;
-}
-*/

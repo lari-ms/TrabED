@@ -16,8 +16,21 @@ typedef struct lista_pacientes{
 
 } Lista;
 
+//Alterações Lista
 Lista* cria_lista_pacientes();
+void remover_paciente(Lista *lista);
+void cadastrar_paciente(Lista *lista_pacientes);
+void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
+
+//Operações Lista
+Lista* consultar_paciente(Lista *lista_pacientes);
 void imprimir_lista(Lista *lista);
 int tamanho_lista(Lista *lista);
-void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
+int lista_vazia(Lista *lista);
+
+//Buscas Lista
+Paciente* consulta_id(int id, Lista *lista);
+Paciente* consulta_cpf(char* cpf, Lista *lista);
+Lista* consulta_nome(char* nome, Lista *lista);
+
 #endif
