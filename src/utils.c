@@ -39,11 +39,9 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
             verificador2 = 11-resto;
         
         }
-        //printf("verificador2 = %d  |  algarismo 11: %d\n", verificador2, (cpf[10])-'0');
 
         return (cpf[10])-'0' == verificador2;
     }
-
 }
 
 void Menu(){
@@ -87,29 +85,4 @@ void Menu(){
             break;
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-int main(){
-
-    char cpf[12];
-    scanf("%s", &cpf);
-    printf("%s\n", cpf);
-    int valido = valida_cpf(cpf);
-    printf("%s: %d\n", cpf, valido);
-
-    return 0;
-}
-*/
