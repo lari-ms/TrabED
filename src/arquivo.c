@@ -67,6 +67,7 @@ Lista *arq_ler_pacientes(const char *nome_arquivo) {
             Paciente *novo = arq_criar_paciente(id, cpf, nome, idade, data_cadastro);
             if (novo) {
                 inserir_paciente_lista(novo, lista);
+                //lista->qtd++;
             }
         } else {
             fprintf(stderr, "Erro: linha inválida: %s", linha);

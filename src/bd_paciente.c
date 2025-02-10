@@ -45,6 +45,7 @@ void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes){
     }
     node->proximo = NULL;
     lista_pacientes->ultimo = node;
+    lista_pacientes->qtd++;
     
 }
 

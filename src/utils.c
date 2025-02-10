@@ -75,11 +75,11 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
 
 void Menu(){
     printf("teste\n");
-    Lista *lista_pacientes = arq_ler_pacientes("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv");
+    Lista *lista_pacientes = arq_ler_pacientes("./database/bd_paciente.csv");
     printf("teste\n");    
     int opcao = 0;
 
-    while(opcao != 5){
+    while(opcao != 6){
 
         printf("\n=====================\n");
         printf("    MENU PRINCIPAL   \n");
@@ -88,7 +88,8 @@ void Menu(){
         printf("2 - Consultar paciente\n");
         printf("3 - Remover paciente\n");
         printf("4 - Atualizar paciente\n");
-        printf("5 - Sair\n");
+        printf("5 - Imprimir lista de pacientes\n");
+        printf("6 - Sair\n");
         printf("=====================\n");
         printf("Escolha uma opcao: ");
 
@@ -110,6 +111,10 @@ void Menu(){
                 atualizar_paciente(lista_pacientes);
                 break;
             case 5:
+                imprimir_lista(lista_pacientes);
+                printf("%d", lista_pacientes->qtd);
+                break;
+            case 6:
                 printf("Fim da execucao\n");
                 break;
             default:
@@ -118,7 +123,7 @@ void Menu(){
         }
     }
 
-    arq_inserir_lista(lista_pacientes, "C:\\Users\\bield\\Documents\\Gabriel\\ED_Projeto\\TrabED\\database\\bd_paciente.csv");
+    arq_inserir_lista(lista_pacientes, ".\\database\\bd_paciente.csv");
 
 
 }
