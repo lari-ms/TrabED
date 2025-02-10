@@ -104,3 +104,7 @@ Cria um novo paciente com os dados fornecidos.
 Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, Lista* lista_pacientes)
 ```
 Retorna um TAD Paciente<br><br>
+
+
+
+## **[...]**
