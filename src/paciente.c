@@ -144,7 +144,6 @@ void consultar_paciente(Lista *lista_pacientes){
     }
 }
 
-
 void remover_paciente(Lista *lista){
     consultar_paciente(lista);
     printf("Digite o ID do paciente a ser excluído:\n\n");
