@@ -63,7 +63,7 @@ void atualizar_paciente(Lista *lista){
     }
     printf("Digite o ID do paciente a ser atualizado:\n\n");
     int id;
-    scanf("%d", &id);
+    scanf("%d", &id); 
 
     Paciente *paciente = consulta_id(id, pacientes_encontrados);
     if (paciente == NULL) {//caso o ID não seja encontrado, cancela a atualização
@@ -108,7 +108,9 @@ void atualizar_paciente(Lista *lista){
     }
 
     printf("Novo Nome: ");
-    scanf("%s", novo_nome);
+    getchar(); // Limpa o buffer do teclado
+    fgets(novo_nome, sizeof(novo_nome), stdin);
+    novo_nome[strcspn(novo_nome, "\n")] = '\0'; // Remove o caractere de nova linha
 
     if (strcmp(novo_nome, "-") != 0){
         if (!contemNumero(novo_nome)){

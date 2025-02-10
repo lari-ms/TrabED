@@ -139,7 +139,9 @@ Lista* consultar_paciente(Lista *lista_pacientes){
     if (modo_busca == 1){
         char nome[100];
         printf("Digite o nome\n\n");
-        scanf("%s", nome);
+        getchar(); // Limpa o buffer do teclado
+        fgets(nome, sizeof(nome), stdin);
+        nome[strcspn(nome, "\n")] = '\0'; // Remove o caractere de nova linha
         printf("\n");
         pacientes_encontrados = consulta_nome(nome, lista_pacientes);
         if (lista_vazia(pacientes_encontrados)){
@@ -188,7 +190,9 @@ void cadastrar_paciente(Lista *lista_pacientes){
     printf("Digite o CPF do paciente: ");
     scanf("%s", cpf);
     printf("Digite o nome do paciente: ");
-    scanf("%s", nome);
+    getchar(); // Limpa o buffer do teclado
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = '\0'; // Remove o caractere de nova linha
     printf("Digite a idade do paciente: ");
     scanf("%d", &idade);
     printf("Digite a data de cadastro do paciente (dd/mm/yyyy): ");
