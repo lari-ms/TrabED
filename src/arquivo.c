@@ -7,22 +7,6 @@
 
 #define MAX_LINHA 256
 
-void cadastrar_paciente(Lista *lista_pacientes){
-    char Cpf[15], Nome[100], Data_cadastro[11];
-    int Idade;
-    printf("Digite o CPF do paciente: ");
-    scanf("%s", Cpf);
-    printf("Digite o nome do paciente: ");
-    scanf("%s", Nome);
-    printf("Digite a idade do paciente: ");
-    scanf("%d", &Idade);
-    printf("Digite a data de cadastro do paciente: ");
-    scanf("%s", Data_cadastro);
-    int id = ++lista_pacientes->qtd; // Assuming id is the next available id
-    Paciente *novo_paciente = arq_criar_paciente(id, Cpf, Nome, Idade, Data_cadastro);
-    inserir_paciente_lista(novo_paciente, lista_pacientes);
-}
-
 void arq_inserir_lista(Lista *lista, const char *nome_arquivo){
     FILE *arquivo = fopen(nome_arquivo, "w");
     if (!arquivo) {

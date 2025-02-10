@@ -28,6 +28,14 @@ int contemNumero(const char* str){
 }
 
 int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
+    if (strlen(cpf) != 11) {
+        return 0;
+    }
+    for (int i = 0; i < 11; i++) {
+        if (!isdigit(cpf[i])) {
+            return 0;
+        }
+    }    
     int soma = 0;
     for (int index=0; index<9; index++){
         int m = 10-index;
@@ -67,7 +75,7 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
 
 void Menu(){
     printf("teste\n");
-    Lista *lista_pacientes = cria_lista_pacientes();
+    Lista *lista_pacientes = arq_ler_pacientes("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv");
     printf("teste\n");    
     int opcao = 0;
 
@@ -78,32 +86,39 @@ void Menu(){
         printf("=====================\n");
         printf("1 - Cadastrar paciente\n");
         printf("2 - Consultar paciente\n");
-        printf("3 - Atualizar paciente\n");
-        printf("4 - Remover paciente\n");
+        printf("3 - Remover paciente\n");
+        printf("4 - Atualizar paciente\n");
         printf("5 - Sair\n");
         printf("=====================\n");
         printf("Escolha uma opcao: ");
 
         scanf("%d", &opcao);
+
+        printf("\n\n");
+
         switch (opcao){
             case 1:
-                printf("teste 1");
+                cadastrar_paciente(lista_pacientes);
                 break;
             case 2:
-                printf("teste 2");
+                consultar_paciente(lista_pacientes);
                 break;
             case 3:
-                printf("teste 3");
+                remover_paciente(lista_pacientes);
                 break;
             case 4:
-                printf("teste 4");
+                atualizar_paciente(lista_pacientes);
                 break;
             case 5:
-                printf("Saindo aqui mano...\n");
+                printf("Fim da execucao\n");
                 break;
             default:
                 printf("Opcao invalida. Tente novamente.\n");
                 break;
         }
     }
+
+    arq_inserir_lista(lista_pacientes, "C:\\Users\\bield\\Documents\\Gabriel\\ED_Projeto\\TrabED\\database\\bd_paciente.csv");
+
+
 }
