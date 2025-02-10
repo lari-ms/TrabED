@@ -11,7 +11,7 @@ typedef struct paciente{
 } Paciente;
 
 Paciente* cria_paciente(char* cpf, char *nome, int idade, char *data_cadastro, Lista* lista_pacientes);
-int consultar_paciente(Lista *lista_pacientes);//retorna -1 se algo der errado ou 0 se houver sucesso
+void consultar_paciente(Lista *lista_pacientes);
 void inserir_paciente_lista(Paciente *paciente, Lista *lista_pacientes);
 Paciente* consulta_cpf(char* cpf, Lista *lista);
 void remover_paciente(Lista *lista);

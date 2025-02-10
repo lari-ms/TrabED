@@ -7,7 +7,7 @@
 #include <string.h>
 
 
-void arq_inserir_lista(Lista *lista, FILE *arquivo);
+void arq_inserir_lista(Lista *lista, const char *nome_arquivo);
 void cadastrar_paciente(Lista *lista_pacientes);
 Paciente* arq_criar_paciente(int id, const char *cpf, const char *nome, int idade, const char *data_cadastro);
 Lista* arq_ler_pacientes(const char *nome_arquivo);
