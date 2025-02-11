@@ -102,7 +102,6 @@ void Menu(){
                 Lista *lista_consulta = cria_lista_pacientes();
                 lista_consulta = consultar_paciente(lista_pacientes);
                 if (lista_consulta != NULL){
-                    imprimir_lista(lista_consulta);
                     free(lista_consulta);
                 }
                 break;
