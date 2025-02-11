@@ -196,7 +196,9 @@ void cadastrar_paciente(Lista *lista_pacientes){
     printf("Digite a idade do paciente: ");
     scanf("%d", &idade);
     printf("Digite a data de cadastro do paciente (dd/mm/yyyy): ");
-    scanf("%s", data_cadastro);
+    getchar();
+    fgets(data_cadastro, sizeof(data_cadastro), stdin);
+    data_cadastro[strcspn(data_cadastro, "\n")] = '\0';
 
     Paciente *novo_paciente = cria_paciente(cpf, nome, idade, data_cadastro, lista_pacientes);
     

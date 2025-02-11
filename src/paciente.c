@@ -139,7 +139,9 @@ void atualizar_paciente(Lista *lista){
     }
 
     printf("Nova Data de Cadastro: ");
-    scanf("%s", nova_data_cadastro);
+    getchar();
+    fgets(nova_data_cadastro, sizeof(nova_data_cadastro), stdin);
+    nova_data_cadastro[strcspn(nova_data_cadastro, "\n")] = '\0';
     
     if (strcmp(nova_data_cadastro, "-") != 0) {
         if (strlen(nova_data_cadastro) == 10) {
