@@ -71,7 +71,7 @@ int valida_cpf(char* cpf){ //0 - valido   | 1 - invalido
 }
 
 void Menu(){
-    Lista *lista_pacientes = arq_ler_pacientes("C:/Users/bield/Documents/Gabriel/ED_Projeto/TrabED/database/bd_paciente.csv");
+    Lista *lista_pacientes = arq_ler_pacientes("../database/bd_paciente.csv");
     char opcao = 0;
 
     while(opcao != 'Q'){
