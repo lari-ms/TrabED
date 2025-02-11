@@ -87,8 +87,8 @@ typedef struct paciente {
 ## Principais funções e Exemplos de Execução
 
 
-Exibe o as operações primárias do programa
 ### Menu Principal
+Exibe o as operações primárias do programa
 ```C
 void Menu();
 //  =====================
@@ -104,8 +104,8 @@ void Menu();
 //  Escolha uma opcao: 
 ```
 
-Realiza o cadastro de um novo paciente na lista duplamente encadeada
 ### Cadastro de Paciente
+Realiza o cadastro de um novo paciente na lista duplamente encadeada
 ```C
 void cadastrar_paciente(Lista* lista);
 //  Digite o CPF do paciente: 12345678901
@@ -115,8 +115,8 @@ void cadastrar_paciente(Lista* lista);
 //  Paciente cadastrado com sucesso!
 ```
 
-Percorre a lista e retorna os pacientes correspondentes
 ### Consulta de Paciente
+Percorre a lista e retorna os pacientes correspondentes
 ```C
 Lista* consultar_paciente(Lista *lista_pacientes);
 //  Escolha o modo de consulta:
@@ -135,8 +135,9 @@ Lista* consultar_paciente(Lista *lista_pacientes);
 //  Data de Cadastro: 01/01/2023
 //  -------------------------------
 ```
-Recebe os novos dados de um paciente e atualiza suas informações
+
 ### Atualização de Paciente
+Recebe os novos dados de um paciente e atualiza suas informações
 ```C
 void atualizar_paciente(Lista *lista);
 //  Digite o ID do paciente a ser atualizado:
@@ -164,8 +165,8 @@ void atualizar_paciente(Lista *lista);
 //  Alteracoes confirmadas.
 ```
 
-Remove o paciente correspondente da lista
 ### Remoção de Paciente
+Remove o paciente correspondente da lista
 ```C
 void remover_paciente(Lista *lista);
 //  Digite o ID do paciente a ser excluido:
@@ -185,9 +186,8 @@ void remover_paciente(Lista *lista);
 //  Registro removido com sucesso.
 ```
 
-
-Recebe uma lista de pacientes e exibe seu conteúdo
 ### Impressão da Lista de Pacientes
+Recebe uma lista de pacientes e exibe seu conteúdo
 ```C
 void imprimir_lista(Lista *lista);
 //  ID    CPF                 Nome                Idade         Data_Cadastro
