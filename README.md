@@ -84,110 +84,113 @@ typedef struct paciente {
 <br>
 
 
-## Principais funções de manipulação (da lista?)
+## Principais funções e Exemplos de Execução
+
+
+Exibe o as operações primárias do programa
+### Menu Principal
+```C
+void Menu();
+//  =====================
+//      MENU PRINCIPAL   
+//  =====================
+//  1 - Cadastrar paciente
+//  2 - Consultar paciente
+//  3 - Remover paciente
+//  4 - Atualizar paciente
+//  5 - Imprimir Lista
+//  Q - Sair
+//  =====================
+//  Escolha uma opcao: 
+```
+
+Realiza o cadastro de um novo paciente na lista duplamente encadeada
+### Cadastro de Paciente
+```C
+void cadastrar_paciente(Lista* lista);
+//  Digite o CPF do paciente: 12345678901
+//  Digite o nome do paciente: João Silva
+//  Digite a idade do paciente: 30
+//  Digite a data de cadastro do paciente (dd/mm/yyyy): 01/01/2023
+//  Paciente cadastrado com sucesso!
+```
+
+Percorre a lista e retorna os pacientes correspondentes
+### Consulta de Paciente
+```C
+Lista* consultar_paciente(Lista *lista_pacientes);
+//  Escolha o modo de consulta:
+//  1 - por nome
+//  2 - por CPF
+//  3 - retornar ao menu principal
+
+//  1 
+//  Digite o nome
+//  João
+
+//  ID: 1
+//  CPF: 123.456.789-01
+//  Nome: João Silva
+//  Idade: 30
+//  Data de Cadastro: 01/01/2023
+//  -------------------------------
+```
+Recebe os novos dados de um paciente e atualiza suas informações
+### Atualização de Paciente
+```C
+void atualizar_paciente(Lista *lista);
+//  Digite o ID do paciente a ser atualizado:
+
+//  1
+//  Digite o novo valor para os campos CPF (apenas digitos), Nome, Idade e Data de Cadastro,
+//  ou '-' para manter o valor atual.
+
+//  Novo CPF: -
+//  Novo Nome: João Pedro Silva
+//  Nova Idade: -
+//  Nova Data de Cadastro: -
+
+//  Confirme os novos valores:
+
+//  ID: 1
+//  CPF: 123.456.789-01
+//  Nome: João Pedro Silva
+//  Idade: 30
+//  Data de Cadastro: 01/01/2023
+//  -------------------------------
+
+//  Deseja confirmar as alteracoes? (S/N)
+//  S
+//  Alteracoes confirmadas.
+```
+
+Remove o paciente correspondente da lista
+### Remoção de Paciente
+```C
+void remover_paciente(Lista *lista);
+//  Digite o ID do paciente a ser excluido:
+
+//  1
+
+//  Tem certeza de que deseja excluir o registro abaixo? (S/N)
+
+//  ID: 1
+//  CPF: 123.456.789-01
+//  Nome: João Pedro Silva
+//  Idade: 30
+//  Data de Cadastro: 01/01/2023
+//  -------------------------------
+
+//  S
+//  Registro removido com sucesso.
+```
+
 
 Recebe uma lista de pacientes e exibe seu conteúdo
+### Impressão da Lista de Pacientes
 ```C
 void imprimir_lista(Lista *lista);
-//Saída: 
 //  ID    CPF                 Nome                Idade         Data_Cadastro
 //  2     987.654.321-00      Paciente 1          30            2024/12/02
 //  6     354.624.978-06      Paciente 2          50            2024/07/10
-```
-## Exemplos de Execução
-
-### Menu Principal
-```
-=====================
-    MENU PRINCIPAL   
-=====================
-1 - Cadastrar paciente
-2 - Consultar paciente
-3 - Remover paciente
-4 - Atualizar paciente
-5 - Imprimir Lista
-Q - Sair
-=====================
-Escolha uma opcao: 
-```
-
-### Cadastro de Paciente
-```
-Digite o CPF do paciente: 12345678901
-Digite o nome do paciente: João Silva
-Digite a idade do paciente: 30
-Digite a data de cadastro do paciente (dd/mm/yyyy): 01/01/2023
-Paciente cadastrado com sucesso!
-```
-
-### Consulta de Paciente
-```
-Escolha o modo de consulta:
-1 - por nome
-2 - por CPF
-3 - retornar ao menu principal
-
-1
-Digite o nome
-João
-
-ID: 1
-CPF: 123.456.789-01
-Nome: João Silva
-Idade: 30
-Data de Cadastro: 01/01/2023
--------------------------------
-```
-
-### Atualização de Paciente
-```
-Digite o ID do paciente a ser atualizado:
-
-1
-Digite o novo valor para os campos CPF (apenas digitos), Nome, Idade e Data de Cadastro,
-ou '-' para manter o valor atual.
-
-Novo CPF: -
-Novo Nome: João Pedro Silva
-Nova Idade: -
-Nova Data de Cadastro: -
-
-Confirme os novos valores:
-
-ID: 1
-CPF: 123.456.789-01
-Nome: João Pedro Silva
-Idade: 30
-Data de Cadastro: 01/01/2023
--------------------------------
-
-Deseja confirmar as alteracoes? (S/N)
-S
-Alteracoes confirmadas.
-```
-
-### Remoção de Paciente
-```
-Digite o ID do paciente a ser excluido:
-
-1
-
-Tem certeza de que deseja excluir o registro abaixo? (S/N)
-
-ID: 1
-CPF: 123.456.789-01
-Nome: João Pedro Silva
-Idade: 30
-Data de Cadastro: 01/01/2023
--------------------------------
-
-S
-Registro removido com sucesso.
-```
-
-### Impressão da Lista de Pacientes
-```
-ID    CPF                 Nome                Idade         Data_Cadastro
-2     987.654.321-00      Paciente 1          30            2024/12/02
-6     354.624.978-06      Paciente 2          50            2024/07/10
 ```
